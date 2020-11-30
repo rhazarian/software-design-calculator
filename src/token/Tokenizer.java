@@ -3,6 +3,7 @@ package token;
 public class Tokenizer {
     private static abstract class State {
         abstract void process(char ch);
+        void eof() { };
     }
 
     private class BasicState extends State {
@@ -40,6 +41,12 @@ public class Tokenizer {
                 state.process(ch);
             }
         }
+
+        @Override
+        void eof() {
+            token = new NumberToken(value);
+            state = new BasicState();
+        }
     }
 
     private State state = new BasicState();
@@ -56,6 +63,9 @@ public class Tokenizer {
         while (token == null && pos < string.length()) {
             state.process(string.charAt(pos));
             ++pos;
+        }
+        if (pos == string.length()) {
+            state.eof();
         }
         return token != null;
     }
