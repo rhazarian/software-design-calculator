@@ -15,4 +15,9 @@ public class NumberToken implements Token {
     public void accept(TokenVisitor visitor) {
         visitor.visit(this);
     }
+
+    @Override
+    public String toString() {
+        return "NUMBER(%d)".formatted(value);
+    }
 }

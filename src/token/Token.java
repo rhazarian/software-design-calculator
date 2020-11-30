@@ -1,5 +1,5 @@
 package token;
 
-interface Token {
+public interface Token {
     void accept(TokenVisitor visitor);
 }

@@ -5,4 +5,9 @@ public class Minus extends Operation {
     public int evaluate(int a, int b) {
         return a - b;
     }
+
+    @Override
+    public String toString() {
+        return "MINUS";
+    }
 }
