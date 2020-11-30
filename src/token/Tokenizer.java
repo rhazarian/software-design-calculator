@@ -3,19 +3,25 @@ package token;
 public class Tokenizer {
     private static abstract class State {
         abstract void process(char ch);
-        void eof() { };
+        abstract void eof();
     }
 
     private class BasicState extends State {
+        private Token last;
+
         @Override
         void process(char ch) {
+            if (last != null) {
+                token = last;
+                last = null;
+            }
             switch (ch) {
-                case '(' -> token = new LParen();
-                case ')' -> token = new RParen();
-                case '+' -> token = new Plus();
-                case '-' -> token = new Minus();
-                case '/' -> token = new Div();
-                case '*' -> token = new Mul();
+                case '(' -> last = new LParen();
+                case ')' -> last = new RParen();
+                case '+' -> last = new Plus();
+                case '-' -> last = new Minus();
+                case '/' -> last = new Div();
+                case '*' -> last = new Mul();
                 default -> {
                     if (ch >= '0' && ch <= '9') {
                         state = new NumberState();
@@ -24,7 +30,15 @@ public class Tokenizer {
                         throw new IllegalArgumentException("unexpected character '%s'".formatted(ch));
                     }
                 }
-            };
+            }
+       }
+
+       @Override
+       void eof() {
+           if (last != null) {
+               token = last;
+               last = null;
+           }
        }
     }
 

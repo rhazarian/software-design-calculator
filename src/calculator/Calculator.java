@@ -20,7 +20,7 @@ public class Calculator {
 
         @Override
         public void visit(NumberToken token) {
-            stack.add(token.getValue());
+            stack.push(token.getValue());
         }
 
         @Override
@@ -28,8 +28,8 @@ public class Calculator {
             if (stack.size() < 2) {
                 throw new IllegalArgumentException("an operation should have exactly two arguments");
             }
-            final int a = stack.pop();
             final int b = stack.pop();
+            final int a = stack.pop();
             stack.push(token.evaluate(a, b));
         }
 
