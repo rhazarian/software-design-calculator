@@ -1,6 +1,6 @@
 package token;
 
-interface TokenVisitor {
+public interface TokenVisitor {
     void visit(NumberToken token);
     void visit(LParen token);
     void visit(RParen token);
