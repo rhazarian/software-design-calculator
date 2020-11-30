@@ -70,7 +70,7 @@ public class Parser {
         }
     }
 
-    public static List<Token> parse(String string) {
+    public List<Token> parse(String string) {
         final Visitor visitor = new Visitor();
         final Tokenizer tokenizer = new Tokenizer(string);
         while (tokenizer.hasNext()) {

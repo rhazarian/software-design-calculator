@@ -44,7 +44,7 @@ public class Calculator {
         }
     };
 
-    public static int calculate(List<Token> tokens) {
+    public int calculate(List<Token> tokens) {
         final Visitor visitor = new Visitor();
         for (final Token token : tokens) {
             token.accept(visitor);
